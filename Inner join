@@ -1,0 +1,36 @@
+Assignment 1: Using INNER JOIN
+-- Create two tables: students(student_id, name, age) and courses(course_id, course_name, student_id).
+
+CREATE TABLE students (
+    student_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    age INT
+);
+
+CREATE TABLE courses (
+    course_id SERIAL PRIMARY KEY,
+    course_name VARCHAR(100),
+    student_id INT REFERENCES students(student_id)
+);
+
+INSERT INTO students (name, age) VALUES 
+('Alice', 20),
+('Bob', 22),
+('Charlie', 21);
+
+INSERT INTO courses (course_name, student_id) VALUES 
+('Mathematics', 1),
+('Physics', 2),
+('Mathematics', 3),
+('Chemistry', 1);
+
+-- Write an INNER JOIN query to fetch students along with the courses they are enrolled in.
+SELECT students.student_id, students.name, students.age, courses.course_name
+FROM students
+INNER JOIN courses ON students.student_id = courses.student_id;
+
+-- Modify the query to return only students enrolled in the "Mathematics" course.
+SELECT students.student_id, students.name, students.age, courses.course_name
+FROM students
+INNER JOIN courses ON students.student_id = courses.student_id
+WHERE courses.course_name = 'Mathematics';
