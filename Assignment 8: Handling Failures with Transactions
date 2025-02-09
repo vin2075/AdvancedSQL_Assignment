@@ -1,0 +1,31 @@
+-- Assignment 8: Handling Failures with Transactions
+
+CREATE TABLE bank_accounts (
+    account_id SERIAL PRIMARY KEY,
+    customer_name VARCHAR(100),
+    balance DECIMAL(10,2) CHECK (balance >= 0)
+);
+
+INSERT INTO bank_accounts (customer_name, balance) VALUES
+('Alice', 1000.00),
+('Bob', 500.00);
+
+BEGIN;
+
+-- Deduct $100 from Alice's account
+UPDATE bank_accounts 
+SET balance = balance - 100 
+WHERE customer_name = 'Alice';
+
+-- Introduce an intentional error (e.g., transferring to a non-existent customer)
+UPDATE bank_accounts 
+SET balance = balance + 100 
+WHERE customer_name = 'Charlie';  -- 'Charlie' does not exist
+
+-- If no errors, commit (this won't execute due to error)
+COMMIT;
+
+-- If an error occurs, rollback to maintain data consistency
+ROLLBACK;
+
+SELECT * FROM bank_accounts;
