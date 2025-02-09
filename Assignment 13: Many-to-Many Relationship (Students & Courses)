@@ -1,0 +1,42 @@
+-- Assignment 13: Many-to-Many Relationship (Students & Courses)
+CREATE TABLE students (
+    student_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE courses (
+    course_id SERIAL PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE student_courses (
+    student_id INT,
+    course_id INT,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE
+);
+
+INSERT INTO students (name) VALUES
+('Alice'),
+('Bob'),
+('Charlie');
+
+INSERT INTO courses (course_name) VALUES
+('Mathematics'),
+('Physics'),
+('Computer Science');
+
+INSERT INTO student_courses (student_id, course_id) VALUES
+(1, 1),  -- Alice -> Mathematics
+(1, 2),  -- Alice -> Physics
+(2, 1),  -- Bob -> Mathematics
+(3, 3);  -- Charlie -> Computer Science
+
+SELECT s.student_id, s.name, c.course_name
+FROM students s
+JOIN student_courses sc ON s.student_id = sc.student_id
+JOIN courses c ON sc.course_id = c.course_id
+WHERE c.course_name = 'Mathematics';
+
+
