@@ -1,0 +1,37 @@
+-- Aggregate Functions
+-- Assignment 6: Product Data Analysis
+
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    category VARCHAR(50),
+    price DECIMAL(10,2),
+    stock_quantity INT
+);
+
+
+INSERT INTO products (category, price, stock_quantity) VALUES
+('Electronics', 1200.50, 10),
+('Electronics', 850.75, 5),
+('Electronics', 1500.00, 8),
+('Furniture', 600.00, 15),
+('Furniture', 750.25, 12),
+('Furniture', 900.90, 10),
+('Clothing', 50.00, 30),
+('Clothing', 80.25, 25),
+('Clothing', 45.50, 40);
+
+
+SELECT * 
+FROM products
+ORDER BY price DESC
+LIMIT 1;
+
+
+SELECT SUM(price * stock_quantity) AS total_stock_value
+FROM products;
+
+SELECT category, AVG(price) AS avg_price
+FROM products
+GROUP BY category;
+
+
