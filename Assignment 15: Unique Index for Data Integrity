@@ -1,0 +1,33 @@
+-- Assignment 15: Unique Index for Data Integrity
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(100) UNIQUE,
+    email VARCHAR(255) UNIQUE
+);
+
+CREATE UNIQUE INDEX idx_users_username ON users(username);
+CREATE UNIQUE INDEX idx_users_email ON users(email);
+INSERT INTO users (username, email) VALUES
+('john_doe', 'john@example.com'),
+('alice_wonder', 'alice@example.com');
+
+INSERT INTO users (username, email) VALUES ('john_doe', 'john.doe2@example.com');
+
+ERROR: duplicate key value violates unique constraint "users_username_key"
+DETAIL: Key (username)=(john_doe) already exists.
+
+INSERT INTO users (username, email) VALUES ('new_user', 'john@example.com');
+
+ERROR: duplicate key value violates unique constraint "users_email_key"
+DETAIL: Key (email)=(john@example.com) already exists.
+
+INSERT INTO users (username, email) 
+VALUES ('john_doe', 'john.doe2@example.com') 
+ON CONFLICT (username) DO NOTHING;
+
+INSERT INTO users (username, email) 
+VALUES ('john_doe', 'john.doe2@example.com') 
+ON CONFLICT (username) 
+DO UPDATE SET email = EXCLUDED.email;
+
+
