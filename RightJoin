@@ -1,0 +1,32 @@
+-- Assignment 3: Using RIGHT JOIN
+CREATE TABLE students (
+    student_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    age INT
+);
+
+CREATE TABLE courses (
+    course_id SERIAL PRIMARY KEY,
+    course_name VARCHAR(100),
+    student_id INT REFERENCES students(student_id)
+);
+
+-- Insert students (some will not have a course)
+INSERT INTO students (name, age) VALUES 
+('Alice', 20),
+('Bob', 22),
+('Charlie', 21),
+('David', 23);  -- No course enrolled
+
+-- Insert courses (some without students)
+INSERT INTO courses (course_name, student_id) VALUES 
+('Mathematics', 1),
+('Physics', 2),
+('Chemistry', 1),
+('Biology', NULL),    -- No students enrolled
+('English', NULL);    -- No students enrolled
+
+SELECT students.student_id, students.name, students.age, courses.course_name
+FROM students
+RIGHT JOIN courses ON students.student_id = courses.student_id;
+
