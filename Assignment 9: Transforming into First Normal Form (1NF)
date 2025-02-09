@@ -1,0 +1,27 @@
+-- Assignment 9: Transforming into First Normal Form (1NF)
+
+CREATE TABLE orders (
+    OrderID SERIAL PRIMARY KEY,
+    CustomerName VARCHAR(100)
+);
+
+CREATE TABLE order_products (
+    OrderID INT,
+    Product VARCHAR(100),
+    FOREIGN KEY (OrderID) REFERENCES orders(OrderID)
+);
+
+
+INSERT INTO orders (OrderID, CustomerName) VALUES
+(1, 'Alice'),
+(2, 'Bob');
+
+INSERT INTO order_products (OrderID, Product) VALUES
+(1, 'Apples'),
+(1, 'Oranges'),
+(2, 'Bananas');
+
+
+SELECT o.OrderID, o.CustomerName, op.Product
+FROM orders o
+JOIN order_products op ON o.OrderID = op.OrderID;
