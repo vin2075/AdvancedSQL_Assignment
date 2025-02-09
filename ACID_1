@@ -1,0 +1,50 @@
+-- Assignment 7: ACID Explained – Banking Transactions
+CREATE TABLE bank_accounts (
+    account_id SERIAL PRIMARY KEY,
+    customer_name VARCHAR(100),
+    balance DECIMAL(10,2) CHECK (balance >= 0)
+);
+
+
+INSERT INTO bank_accounts (customer_name, balance) VALUES
+('Alice', 1000.00),
+('Bob', 500.00);
+
+
+BEGIN;
+
+-- Deduct $100 from Alice's account
+UPDATE bank_accounts 
+SET balance = balance - 100 
+WHERE customer_name = 'Alice';
+
+-- Add $100 to Bob's account
+UPDATE bank_accounts 
+SET balance = balance + 100 
+WHERE customer_name = 'Bob';
+
+COMMIT;
+
+
+SELECT * FROM bank_accounts;
+
+
+BEGIN;
+
+-- Deduct $100 from Alice
+UPDATE bank_accounts 
+SET balance = balance - 100 
+WHERE customer_name = 'Alice';
+
+-- Simulate an error (e.g., Bob's account does not exist)
+UPDATE bank_accounts 
+SET balance = balance + 100 
+WHERE customer_name = 'Charlie';  -- This will cause an error
+
+-- Commit the transaction (will not execute due to the error)
+COMMIT;
+
+-- Rollback the transaction if any error occurs
+ROLLBACK;
+
+
