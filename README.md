@@ -11,4 +11,21 @@
 
  # Assignment 7: ACID Explained – Banking Transactions [https://sqlfiddle.com/postgresql/online-compiler?id=73576856-9f4a-44c6-8538-180ba610dee5]
 
+ # Assignment 8: Handling Failures with Transactions [https://sqlfiddle.com/postgresql/online-compiler?id=183ee583-4f9b-409d-b259-103176010cb8]
+
+# Assignment 9: Transforming into First Normal Form (1NF) [https://sqlfiddle.com/postgresql/online-compiler?id=b62d3e57-0891-42cf-a7bf-297c4b05dca5]
+
+# Assignment 10: Applying Second Normal Form (2NF) [https://sqlfiddle.com/postgresql/online-compiler?id=0d3ae2fd-127d-46dd-b906-79258c4e9e2d]
+
+# Assignment 11: Applying Third Normal Form (3NF) [https://sqlfiddle.com/postgresql/online-compiler?id=68f73d0a-c027-4165-9eee-592fe03ec880]
+
+
+# Assignment 12: One-to-Many Relationship [https://sqlfiddle.com/postgresql/online-compiler?id=058f6aef-2c61-4087-a5ae-314e795ad881]
+
  
+# Assignment 13: Many-to-Many Relationship (Students & Courses)  [https://sqlfiddle.com/postgresql/online-compiler?id=b7ac7f4f-bcf0-499c-bf7e-7d1786b1936d]
+
+# Assignment 14: Creating and Using Indexes in PostgreSQL [https://sqlfiddle.com/postgresql/online-compiler?id=978f3d4a-c820-47aa-8a4b-09102adf8c0e]
+
+# Assignment 15: Unique Index for Data Integrity [https://sqlfiddle.com/postgresql/online-compiler?id=df03bb1f-4c89-4be4-bafd-63a05841cb24]
+
