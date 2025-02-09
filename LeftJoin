@@ -12,17 +12,24 @@ CREATE TABLE courses (
     student_id INT REFERENCES students(student_id)
 );
 
+
+-- Insert students (some without any courses)
 INSERT INTO students (name, age) VALUES 
 ('Alice', 20),
 ('Bob', 22),
-('Charlie', 21);
+('Charlie', 21),
+('David', 23),  -- No course enrolled
+('Emma', 24);   -- No course enrolled
 
+-- Insert courses (some students missing)
 INSERT INTO courses (course_name, student_id) VALUES 
 ('Mathematics', 1),
 ('Physics', 2),
 ('Mathematics', 3),
 ('Chemistry', 1);
 
+
 SELECT students.student_id, students.name, students.age, courses.course_name
 FROM students
 LEFT JOIN courses ON students.student_id = courses.student_id;
+
